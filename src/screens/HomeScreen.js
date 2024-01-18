@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { theme } from "../theme";
 import { MagnifyingGlassIcon } from "react-native-heroicons/outline";
@@ -142,14 +142,66 @@ export default function HomeScreen() {
           <CalendarDaysIcon size={22} color={"white"} />
           <Text className="text-white text-base"> Daily forecast</Text>
         </View>
-        <ScrollView 
-        horizontal
-        contentContainerStyle={{paddingHorizontal: 15}}
-        showsHorizontalScrollIndicator={false}
+        <ScrollView
+          horizontal
+          contentContainerStyle={{ paddingHorizontal: 15 }}
+          showsHorizontalScrollIndicator={false}
         >
-        <View className="flex justify-center items-center w-24 rounded-3xl py-3 space-y-1 mr-4">
-
-        </View>
+          <View
+            className="flex justify-center items-center w-24 rounded-3xl py-3 space-y-1 mr-4"
+            style={{ backgroundColor: theme.bgWhite(0.15) }}
+          >
+            <Image
+              source={require("../../assets/images/heavyrain.png")}
+              className="w-11 h-11"
+            />
+            <Text className="text-white">Monday</Text>
+            <Text className="text-white text-xl font-semibold">23&#176;</Text>
+          </View>
+          <View
+            className="flex justify-center items-center w-24 rounded-3xl py-3 space-y-1 mr-4"
+            style={{ backgroundColor: theme.bgWhite(0.15) }}
+          >
+            <Image
+              source={require("../../assets/images/heavyrain.png")}
+              className="w-11 h-11"
+            />
+            <Text className="text-white">Tuesday</Text>
+            <Text className="text-white text-xl font-semibold">23&#176;</Text>
+          </View>
+          <View
+            className="flex justify-center items-center w-24 rounded-3xl py-3 space-y-1 mr-4"
+            style={{ backgroundColor: theme.bgWhite(0.15) }}
+          >
+            <Image
+              source={require("../../assets/images/heavyrain.png")}
+              className="w-11 h-11"
+            />
+            <Text className="text-white">Wednesday</Text>
+            <Text className="text-white text-xl font-semibold">23&#176;</Text>
+          </View>
+          <View
+            className="flex justify-center items-center w-24 rounded-3xl py-3 space-y-1 mr-4"
+            style={{ backgroundColor: theme.bgWhite(0.15) }}
+          >
+            <Image
+              source={require("../../assets/images/heavyrain.png")}
+              className="w-11 h-11"
+            />
+            <Text className="text-white">Thursday</Text>
+            <Text className="text-white text-xl font-semibold">23&#176;</Text>
+          </View>
+          <View
+            className="flex justify-center items-center w-24 rounded-3xl py-3 space-y-1 mr-4"
+            style={{ backgroundColor: theme.bgWhite(0.15) }}
+          >
+            <Image
+              source={require("../../assets/images/heavyrain.png")}
+              className="w-11 h-11"
+            />
+            <Text className="text-white">Friday</Text>
+            <Text className="text-white text-xl font-semibold">23&#176;</Text>
+          </View>
         </ScrollView>
       </View>
     </View>
