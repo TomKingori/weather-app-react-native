@@ -18,3 +18,11 @@ const apiCall = async (endpoint) => {
         return null
     }
 }
+
+export const fetchWeatherforecast = params=>{
+    return apiCall(forecastEndpoint(params))
+}
+
+export const fetchlocations = params=>{
+    return apiCall(locationsEndpoint(params))
+}

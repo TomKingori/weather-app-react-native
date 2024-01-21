@@ -1,8 +1,5 @@
-require('dotenv').config()
+export const apiKey = 'api key goes here';
 
-const apiKey = process.env.API_KEY;
-
-console.log('API Key:', apiKey);
 
 export const weatherImages = {
   "Partly cloudy": require("../../assets/images/partlycloudy.png"),

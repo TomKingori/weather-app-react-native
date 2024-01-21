@@ -7,22 +7,46 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
+  KeyboardAvoidingView,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { theme } from "../theme";
 import { MagnifyingGlassIcon } from "react-native-heroicons/outline";
 import { CalendarDaysIcon, MapPinIcon } from "react-native-heroicons/solid";
+import { debounce } from "lodash";
+import { fetchWeatherforecast, fetchlocations } from "../../api/weather";
 
 const ios = Platform.OS == "ios";
 
 export default function HomeScreen() {
   const [showSearch, toggleSearch] = useState(false);
-  const [locations, setLocations] = useState([1, 2, 3]);
+  const [locations, setLocations] = useState([]);
+  const [weather, setWeather] = useState({});
 
   const handleLocation = (loc) => {
     console.log("location: ", loc);
+    setLocations([]);
+    toggleSearch(false);
+    fetchWeatherforecast({
+      cityName: loc.name,
+      days: "7",
+    }).then((data) => {
+      setWeather(data);
+      console.log("got forecast: ", data);
+    });
   };
+
+  const handleSearch = (value) => {
+    // fetch locations
+    if (value.length > 2) {
+      fetchlocations({ cityName: value }).then((data) => {
+        setLocations(data);
+      });
+    }
+  };
+
+  const handleTextDebounce = useCallback(debounce(handleSearch, 1200), []);
 
   return (
     <View className="flex-1 relative">
@@ -43,6 +67,7 @@ export default function HomeScreen() {
           >
             {showSearch ? (
               <TextInput
+                onChangeText={handleTextDebounce}
                 placeholder="Search city"
                 placeholderTextColor={"lightgray"}
                 className="pl-6 h-10 flex-1 text-base text-white"
@@ -75,7 +100,7 @@ export default function HomeScreen() {
                   >
                     <MapPinIcon size="20" color="gray" />
                     <Text className="text-black text-lg ml-2">
-                      Nairobi, Kenya
+                      {loc?.name}, {loc?.country}
                     </Text>
                   </TouchableOpacity>
                 );
